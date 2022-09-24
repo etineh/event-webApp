@@ -148,7 +148,11 @@ app.get("/plan", (req, res)=>{
     
 })
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
-app.listen(3000, function(){
-    console.log("Hello. I am running on port 3000")
+app.listen(port, function(){
+    console.log("Hello. Server have started running live!")
 })
