@@ -21,13 +21,13 @@ const itemSchema = new mongoose.Schema({
 const ItemModel = mongoose.model("Item", itemSchema)
 
 const todo1 = new ItemModel({
-    name: "I will eat morning food tomorrow"
+    name: "Hit the '+' icon to add your task"
 });
 const todo2 = new ItemModel({
-    name: "I will eat afternoon food tomorrow"
+    name: "<-- click the 'checkbox' to delete>"
 });
 const todo3 = new ItemModel({
-    name: "I will eat evening food tomorrow"
+    name: "Meet up with your task!"
 });
 
 const arrayItem = [todo1, todo2, todo3]
