@@ -1,6 +1,5 @@
 html {
-  background-color: white;
-  min-height: 800px;
+  min-height: 1000px;
   font-family: 'helvetica neue';
 }
 
@@ -28,9 +27,37 @@ html {
   grid-template-columns: 1fr 1fr;
   /* place-items: center; */
 }
+
+.container2{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.work{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  margin-top: 20%;
+}
+
+.icons{
+  padding: 10px;
+  width: 3%;
+}
+
+footer{
+  background-color: purple;
+  text-align: center;
+  color: white;
+  margin-top: 7%;
+  padding: 7%;
+  font-size: 22px;
+}
+
 .img1 {
-  width: 600px;
+  width: 630px;
   height: 500px;
+  display: none;
 }
 .day{
   float: right;
@@ -107,6 +134,14 @@ button {
   .container1 {
     grid-template-columns: 1fr;
   }
+  .container2{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  footer{
+    margin-top: 30%;
+    font-size: 10px;
+  }
   body{
     padding: 0 15px;
   }
@@ -114,8 +149,8 @@ button {
   .img1 {
     display: block;
     margin: 0 auto;
-    width: 200px;
-    height: 190px;
+    width: 220px;
+    height: 200px;
   }
   .day{
     float: left;
@@ -133,10 +168,18 @@ button {
   .container1 {
     grid-template-columns: 1fr 1fr;
   }
+  .container2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  footer{
+    margin-top: 15%;
+    font-size: 15px;
+  }
   .img1 {
     
-    width: 300px;
-    height: 270px;
+    width: 320px;
+    height: 290px;
   }
   .day{
     float: right;
@@ -178,17 +221,13 @@ button {
   color: black;
 }
 
-/* .topnav a.active {
-  background-color: #A683E3;
-  color: white;
-} */
-
 .topnav .icon {
   display: none;
 }
 
 @media screen and (max-width: 650px) {
-  .topnav a:not(:first-child) {display: none;}
+  .topnav a:nth-child(2),
+  .topnav a:nth-child(3) {display: none;} 
   .topnav a.icon {
     float: right;
     display: block;

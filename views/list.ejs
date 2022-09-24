@@ -1,12 +1,17 @@
 <%- include("header") -%>
-    
-    
 
     <div class="container0" style="padding-top: 50px;">
 
         <div class="container1">
 
-            <div class="side"><img src="images/tonew.png" class="img1"></div>
+            <div>
+                <img src="images/tonew.png" class="img1">
+                <img src="images/sa.jpg" class="img1">
+                <img src="images/work.webp" class="img1">
+                <img src="images/lovepik.jpg" class="img1">
+                <img src="images/dd.webp" class="img1">
+                <img src="images/do.jpg" class="img1">
+            </div>
 
             <div>
                 <Div class="day"> <%=KindOfDay %>! </br>Have you complete your task??? 
@@ -14,7 +19,7 @@
                 <div>
                     <div class="box">
                         <form action="/" method="post" class="item">
-                            <input type="text" name="task" placeholder="Enter task" autocomplete="off">
+                            <input type="text" name="task" placeholder="Enter task" autocomplete="off" required>
                             <button type="submit" name="button" value=<%= KindOfDay %>>+</button>
                         </form>
                         <% taskItems.forEach((el)=>{ %>
@@ -31,6 +36,22 @@
             </div>
 
         </div>
+
+        <div class="container2">
+            <div>
+                <img src="images/kin 4.png" class="work">
+            </div>
+            <div>
+                <img src="images/kin1.png" class="work">
+            </div>
+            <div>
+                <img src="images/kin2.png" class="work">
+            </div>
+            <div>
+                <img src="images/kin3.png" class="work">
+            </div>
+        </div>
+
     </div>
 
 

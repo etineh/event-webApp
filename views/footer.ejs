@@ -1,15 +1,50 @@
 <script>
-    function myFunction() {
-      var x = document.getElementById("myTopnav");
-      if (x.className === "topnav") {
-        x.className += " responsive";
-      } else {
-        x.className = "topnav";
-      }
+
+var count = 0;
+display();
+
+  function display() {
+    var i;
+    var dis = document.getElementsByClassName("img1");
+    for (i = 0; i < dis.length; i++) {
+      dis[i].style.display = "none";  
     }
+    count++;
+    if (count > dis.length) {count = 1}    
+    dis[count-1].style.display = "block";  
+    setTimeout(display, 3000);
+  }
+
+  function myFunction() {
+    var el = document.getElementById("myTopnav");
+    if (el.className === "topnav") {
+      el.className += " responsive";
+    } else {
+      el.className = "topnav";
+    }
+  }
 </script>
 
-
-
 </body>
+
+<footer>
+
+  <div>etine4real@gmail.com</div>
+  <div>
+    <a href="https://www.linkedin.com/in/godstime-etineh-76161a11b/">
+      <img src="images/linIcon.png" class="icons">
+    </a>
+    <a href="https://www.twitter.com/Mr_Etineh">
+      <img src="images/twitter icon.png" class="icons">
+    </a>
+    <a href="https://discord.gg/DDXvBksytm">
+      <img src="images/discordIcon.png" style="width: 3.6%; padding: 10px;">
+    </a>
+    <a href="https://github.com/etineh">
+      <img src="images/githubIcon.png" class="icons">
+    </a>
+  </div>
+
+</footer>
+
 </html>
