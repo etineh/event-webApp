@@ -14,7 +14,7 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(session({
-    secret : "this is my second cookies",
+    secret : process.env.SECRET,
     resave: false,
     saveUninitialized: false 
 }))
