@@ -14,21 +14,24 @@
             </div>
 
             <div>
-                <Div class="day"> <%=KindOfDay %>! </br>Have you complete your task??? 
+                <div class="day">                    
+                        <%=KindOfDay %> 
+                        <a href="logout" class="logout">logout</a>     
                 </div><br><br>
-                <div>
+
+                <div style="margin-right: 50px;">
                     <div class="box">
-                        <form action="/" method="post" class="item">
+                        <form action="/event" method="post" class="item">
                             <input type="text" name="task" placeholder="Enter task" autocomplete="off" required>
-                            <button type="submit" name="button" value=<%= KindOfDay %>>+</button>
+                            <button type="submit" name="button" value=<%= valid %>>+</button>
                         </form>
                         <% taskItems.forEach((el)=>{ %>
                             <form action="/delete" method="post">
                                 <div class="item">
-                                    <input type="checkbox" onClick="this.form.submit()" value="<%= el._id %>" name="checkbox">
+                                    <input type="checkbox" onClick="this.form.submit()" value="<%= el._id %><%= valid %>" name="checkbox">
                                     <p> <%= el.name %> </p>
                                 </div>
-                                <input type="hidden" name="hide" value=<%= KindOfDay %>>
+                                
                             </form>
                             <% }) %> 
                     </div>
