@@ -135,7 +135,7 @@ app.get("/", (req, res)=>{
     if(req.isAuthenticated()){
         res.render("home", {header1: `hello! ${req.user.fullName}...`, header2:""})
     } else {
-        res.render("home", {header1: "register/login", header2:"login_signup"})
+        res.render("home", {header1: "user", header2:"login_signup"})
     }
     
 })
