@@ -101,7 +101,14 @@ h3 {
 .ph3{
   display: none;
 }
-
+.sec {
+  border-style: groove;
+  border-radius: 20px;
+  margin: 50px;
+  padding: 0px 40px;
+  text-align: center;
+  line-height: 20px;
+}
 .wrt {
   font-size: 2.5rem;
   font-family: 'Brush Script MT', cursive;
@@ -188,6 +195,9 @@ button {
   .container2{
     display: grid;
     grid-template-columns: 1fr;
+  }
+  .sec{
+    padding: 0 20px;
   }
   footer{
     margin-top: 30%;
