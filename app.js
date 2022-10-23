@@ -93,7 +93,7 @@ app.get("/event", (req, res) =>{
 app.get("/login_signup", (req, res)=>{
     res.render("login_signup", {viewDisplay1: "Sign-Up"});
 })
-
+//////////////////////   login and signup code    /////////////////////////
 app.post("/login_signup", (req, res)=>{
      check1 = req.body.check
     let formName = req.body.fName
@@ -141,34 +141,29 @@ app.get("/", (req, res)=>{
     
 })
 
+///////////     edit function /////////////////
 app.post("/edit", (req, res)=>{
     let validCheck = req.body.edit
     let checkId = validCheck.slice(0,24)
     let validPage = validCheck.slice(24)
-    if(validPage === "work"){
         editCheck = 1
         editId = checkId
+    if(validPage === "work"){
         WorkModel.findById(checkId, (err, seen)=>{
             !err ? taskHolder = seen.name : null
         })
         res.redirect("/work")
     } else if(validPage === "study"){
-        editCheck = 1
-        editId = checkId
         StudyModel.findById(checkId, (err, seen)=>{
             !err ? taskHolder = seen.name : null
         })
         res.redirect("/study")
     } else if(validPage === "plan"){
-        editCheck = 1
-        editId = checkId
         PlanModel.findById(checkId, (err, seen)=>{
             !err ? taskHolder = seen.name : null
         })
         res.redirect("/plan")
     } else {
-        editCheck = 1
-        editId = checkId
         ItemModel.findById(checkId, (err, seen)=>{
             !err ? taskHolder = seen.name : null
         })
@@ -176,6 +171,7 @@ app.post("/edit", (req, res)=>{
     } 
 })
 
+///////////     delete function /////////////////
 app.post("/delete", (req, res)=>{
     let validCheck = req.body.checkbox
     let checkId = validCheck.slice(0,24)
