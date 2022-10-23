@@ -22,17 +22,19 @@
                 <div class="cover">
                     <div class="box">
                         <form action="/event" method="post" class="item">
-                            <input type="text" name="task" placeholder="Enter task" autocomplete="off" required>
+                            <input type="text" name="task" value="<%= enterTask %>" placeholder="Enter Task" autocomplete="off" required>
                             <button type="submit" name="button" value=<%= valid %>>+</button>
                         </form>
                         <% taskItems.forEach((el)=>{ %>
                             <form action="/delete" method="post">
-                                <div class="item">
+                                <div class="item editBut">
                                     <input type="checkbox" onClick="this.form.submit()" value="<%= el._id %><%= valid %>" name="checkbox">
                                     <p> <%= el.name %> </p>
                                 </div>
-                                
                             </form>
+                            <form action="/edit" method="post">                    
+                                <button type="submit" name="edit" class="edi" value="<%= el._id %><%= valid %>"> edit </button>                  
+                            </form> 
                             <% }) %> 
                     </div>
                 </div>

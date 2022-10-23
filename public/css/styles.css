@@ -84,6 +84,15 @@ h3 {
   margin: 0 40px;
   text-decoration: none
 }
+.edi {
+  background: purple;
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 7px;
+  margin-left: 40px;
+  min-height: 30px;
+  width: 50px;
+}
 .img3 {
   width: 500px;
   height: 500px;

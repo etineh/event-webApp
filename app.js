@@ -74,12 +74,13 @@ const planSchema = new mongoose.Schema({
 const PlanModel = mongoose.model("plan", planSchema);
 
 let itemAdd = "", itemAdd2 = "", itemStudy = "", itemPlan = "";
-let check = ""
+let check = "", editId, editCheck = 0, taskHolder = ""
 
 app.get("/event", (req, res) =>{
     if(req.isAuthenticated()){
         ItemModel.find({"userId": req.user.id}, (err, displayItem)=>{  
-            res.render("list", {KindOfDay:`Welcome ${req.user.fullName}`, taskItems: displayItem, valid:"event"})
+            res.render("list", {enterTask: taskHolder, KindOfDay:`Welcome ${req.user.fullName}`, taskItems: displayItem, valid:"event"})
+            taskHolder = ""
         })    
     } else {
         check === "reg" ? res.render("login_signup", {viewDisplay1: "Login Now!"})
@@ -140,15 +141,49 @@ app.get("/", (req, res)=>{
     
 })
 
+app.post("/edit", (req, res)=>{
+    let validCheck = req.body.edit
+    let checkId = validCheck.slice(0,24)
+    let validPage = validCheck.slice(24)
+    if(validPage === "work"){
+        editCheck = 1
+        editId = checkId
+        WorkModel.findById(checkId, (err, seen)=>{
+            !err ? taskHolder = seen.name : null
+        })
+        res.redirect("/work")
+    } else if(validPage === "study"){
+        editCheck = 1
+        editId = checkId
+        StudyModel.findById(checkId, (err, seen)=>{
+            !err ? taskHolder = seen.name : null
+        })
+        res.redirect("/study")
+    } else if(validPage === "plan"){
+        editCheck = 1
+        editId = checkId
+        PlanModel.findById(checkId, (err, seen)=>{
+            !err ? taskHolder = seen.name : null
+        })
+        res.redirect("/plan")
+    } else {
+        editCheck = 1
+        editId = checkId
+        ItemModel.findById(checkId, (err, seen)=>{
+            !err ? taskHolder = seen.name : null
+        })
+        res.redirect("/event")
+    } 
+})
+
 app.post("/delete", (req, res)=>{
-    
     let validCheck = req.body.checkbox
     let checkId = validCheck.slice(0,24)
     let validPage = validCheck.slice(24)
     if(validPage === "work"){
         WorkModel.findByIdAndRemove(checkId, (err)=>{
             res.redirect("/work")
-        })  
+        })
     }else if(validPage === "study"){
         StudyModel.findByIdAndRemove(checkId, (err)=>{
             res.redirect("/study")
@@ -164,7 +199,7 @@ app.post("/delete", (req, res)=>{
     }
 })
 
-
+/////////////    All Page Post     ////////////////
 app.post("/event", (req, res)=> {
     itemAdd = new ItemModel({
         name: req.body.task,
@@ -188,25 +223,55 @@ app.post("/event", (req, res)=> {
     
     let validPage = req.body.button
     if(validPage === "work"){
-        itemAdd2.save()
-        res.redirect("/work");
+        if(editCheck){
+            WorkModel.findByIdAndUpdate(editId, {name: req.body.task}, (err)=>{
+                !err ? res.redirect("/work") : null;
+                editCheck = 0;
+            })
+        } else{
+            itemAdd2.save()
+            res.redirect("/work");
+        }
     } else if(validPage === "study"){
-        itemStudy.save();
-        res.redirect("/study");
+        if(editCheck){
+            StudyModel.findByIdAndUpdate(editId, {name: req.body.task}, (err)=>{
+                !err ? res.redirect("/study") : null;
+                editCheck = 0;
+            })
+        } else{
+            itemStudy.save()
+            res.redirect("/study");
+        }
     } else if(validPage === "plan") {
-        itemPlan.save();
-        res.redirect("/plan");
+        if(editCheck){
+            PlanModel.findByIdAndUpdate(editId, {name: req.body.task}, (err)=>{
+                !err ? res.redirect("/plan") : null;
+                editCheck = 0;
+            })
+        } else{
+            itemPlan.save()
+            res.redirect("/plan");
+        }
     } else {
-        itemAdd.save();
-        res.redirect("/event");
+        if(editCheck){
+            ItemModel.findByIdAndUpdate(editId, {name: req.body.task}, (err)=>{
+                !err ? res.redirect("/event") : null;
+                editCheck = 0;
+            })
+        } else{
+            itemAdd.save()
+            res.redirect("/event");
+        }
     }
  
 });
 
+/////////////    All Page Get     ////////////////
 app.get("/work", (req, res) => {
     if(req.isAuthenticated()){
         WorkModel.find({"userId": req.user.id}, (err, displayWork)=>{
-            res.render("list", {KindOfDay: `Welcome ${req.user.fullName}`, taskItems: displayWork, valid:"work"})
+            res.render("list", {enterTask: taskHolder, KindOfDay: `Welcome ${req.user.fullName}`, taskItems: displayWork, valid:"work"})
+            taskHolder = ""
         })
     } else {
         check === "reg" ? res.render("login_signup", {viewDisplay1: "Login Now!"})
@@ -219,7 +284,8 @@ app.get("/work", (req, res) => {
 app.get("/study", (req, res)=>{
     if(req.isAuthenticated()){
         StudyModel.find({"userId": req.user.id}, (err, displayWork)=>{
-            res.render("list", {KindOfDay: `Welcome ${req.user.fullName}`, taskItems: displayWork, valid:"study"})
+            res.render("list", {enterTask: taskHolder, KindOfDay: `Welcome ${req.user.fullName}`, taskItems: displayWork, valid:"study"})
+            taskHolder = ""
         })
     } else {
         check === "reg" ? res.render("login_signup", {viewDisplay1: "Login Now!"})
@@ -231,7 +297,8 @@ app.get("/study", (req, res)=>{
 app.get("/plan", (req, res)=>{
     if(req.isAuthenticated()){
         PlanModel.find({"userId": req.user.id}, (err, displayWork)=>{
-            res.render("list", {KindOfDay: `Welcome ${req.user.fullName}`, taskItems: displayWork, valid:"plan"})
+            res.render("list", {enterTask: taskHolder, KindOfDay: `Welcome ${req.user.fullName}`, taskItems: displayWork, valid:"plan"})
+            taskHolder = ""
         })
     } else {
         check === "reg" ? res.render("login_signup", {viewDisplay1: "Login Now!"})
