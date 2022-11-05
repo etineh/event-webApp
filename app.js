@@ -2,10 +2,10 @@
 require("dotenv").config()
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose"); 
-const mongoose = require("mongoose");
 
 const app = express(); 
 
@@ -100,12 +100,12 @@ app.post("/login_signup", (req, res)=>{
     ///// check1 is undefined, yet it's working... lol
     if(check1){
         check = "reg"
-        User_Model.register({username: req.body.email}, req.body.password, (err, user)=>{
+        User_Model.register({username: req.body.username}, req.body.password, (err, user)=>{
             if(err){
                 res.render("login_signup", {viewDisplay1: "Email already exist. Login!"});
                 console.log(err)
             } else {
-                passport.authenticate('local-signup')(req, res, ()=>{
+                passport.authenticate('local')(req, res, ()=>{
                     user.fullName = formName
                     user.save()
                     res.redirect("/event")
@@ -115,15 +115,16 @@ app.post("/login_signup", (req, res)=>{
     } else {
         check = "log"
         const user1 = new User_Model({
-            username: req.body.email,
+            username: req.body.username,
             password: req.body.password
         })
         req.logIn(user1, (err, user)=>{
+            // console.log(user)
             if(err){
                 res.render("login_signup")
                 console.log(err)
             } else{
-                passport.authenticate(("local-login"))(req, res, ()=>{
+                passport.authenticate("local")(req, res, ()=>{
                     res.redirect("/event")
                 })
             }
