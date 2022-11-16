@@ -7,5 +7,5 @@ NODE.JS FOR BACKEND USING EXPRESS AS THE FRAMEWORK.
 ESJ AND JAVASCRIPT FOR FRONTEND.
 
 
-This app is availiable on heroku. Follow the link to get directed there.
+This app is available on heroku. Follow the link to get directed there.
 https://tranquil-wave-36097.herokuapp.com/ 
