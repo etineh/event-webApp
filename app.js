@@ -97,7 +97,7 @@ app.get("/login_signup", (req, res)=>{
 app.post("/login_signup", (req, res)=>{
      check1 = req.body.check
     let formName = req.body.fName
-    ///// check1 is undefined, yet it's working... lol
+    /////  fun time -- check1 is undefined, yet it's working... lol
     if(check1){
         check = "reg"
         User_Model.register({username: req.body.username}, req.body.password, (err, user)=>{
@@ -119,7 +119,6 @@ app.post("/login_signup", (req, res)=>{
             password: req.body.password
         })
         req.logIn(user1, (err, user)=>{
-            // console.log(user)
             if(err){
                 res.render("login_signup")
                 console.log(err)
@@ -196,7 +195,7 @@ app.post("/delete", (req, res)=>{
     }
 })
 
-/////////////    All Page Post     ////////////////
+/////////////    All Page Post.. #edit or #save     ////////////////
 app.post("/event", (req, res)=> {
     itemAdd = new ItemModel({
         name: req.body.task,
@@ -263,7 +262,7 @@ app.post("/event", (req, res)=> {
  
 });
 
-/////////////    All Page Get     ////////////////
+/////////////    All Pages Get     ////////////////
 app.get("/work", (req, res) => {
     if(req.isAuthenticated()){
         WorkModel.find({"userId": req.user.id}, (err, displayWork)=>{
@@ -310,6 +309,10 @@ app.get("/logout", (req, res)=>{
         !err ? res.redirect("/") : console.log(err)
     })
 })
+
+app.get("*",(req, res) => {
+    res.redirect("/");
+});
 
 let port = process.env.PORT;
 if (port == null || port == "") {
